@@ -1,0 +1,28 @@
+{
+  "name": "pomodoro-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbielKiflu/pomodoro-app.git"
+  },
+  "author": "Abiel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AbielKiflu/pomodoro-app/issues"
+  },
+  "homepage": "https://github.com/AbielKiflu/pomodoro-app#readme",
+  "dependencies": {
+    "parcel-bundler": "^1.12.5",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "sass": "^1.50.0"
+  }
+}
