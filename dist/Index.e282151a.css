@@ -8,14 +8,75 @@ body {
   align-items: center;
   justify-content: space-around;
   height: 100vh;
-  background: #f8f9fa;
+  background: #e5eff8;
+}
+
+.setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  box-shadow: 0.2rem 0.2rem 0.5rem rgba(71, 122, 133, 0.3137254902);
+  padding: 0.5rem;
+}
+
+input[type=checkbox] {
+  visibility: hidden;
+  position: absolute;
+  left: 100rem;
+}
+
+label {
+  display: inline-block;
+  width: 4rem;
+  height: 1.5rem;
+  background-color: #e05045;
+  border-radius: 1rem;
+  position: relative;
+  cursor: pointer;
+  transition: 0.5s;
+  box-shadow: 0 0 0.5rem rgba(71, 122, 133, 0.3137254902);
+}
+
+label::after {
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  background-color: #e8f5f7;
+  position: absolute;
+  border-radius: 0.5rem;
+  top: 0.25rem;
+  left: 0;
+  transition: 0.5s;
+}
+
+input[type=checkbox]:checked + label:after {
+  left: 4rem;
+  transform: translateX(-100%);
+}
+
+input:checked + label {
+  background-color: #477a85;
+}
+
+.btn {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  color: white;
+  border-radius: 1rem;
+  background-color: #477a85;
+}
+.btn:hover {
+  background-color: #243d42;
 }
 
 .circle {
   padding: 0;
-  margin: 0;
+  margin-bottom: 1rem;
   position: relative;
-  outline: 1px solid red;
+  box-shadow: 0.2rem 0.2rem 0.5rem gray;
 }
 .circle svg {
   width: 200px;
@@ -51,13 +112,6 @@ body {
   font-size: 2rem;
   font-weight: bold;
   color: #2849da;
-}
-
-.btn {
-  margin: 0.4rem 0.1rem;
-  padding: 0 1rem;
-  color: white;
-  background: #2849da;
 }
 
 /*# sourceMappingURL=/Index.e282151a.css.map */

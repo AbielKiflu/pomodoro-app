@@ -32965,15 +32965,18 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Setting() {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("button", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "setting"
+  }, /*#__PURE__*/_react.default.createElement("button", {
     className: "btn"
   }, "+"), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn"
-  }, "-"), /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn"
-  }, "Start"), /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn"
-  }, "Stop"));
+  }, "-"), /*#__PURE__*/_react.default.createElement("input", {
+    type: "checkbox",
+    id: "toggle"
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "toggle"
+  })));
 }
 },{"react":"../node_modules/react/index.js"}],"js/Index.js":[function(require,module,exports) {
 "use strict";

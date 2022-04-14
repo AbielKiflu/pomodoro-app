@@ -5,12 +5,14 @@ import React from 'react';
 
   return (
     <>
+        <div className="setting">
         <button className="btn">+</button>
         <button className="btn">-</button>
-        <button className="btn">Start</button>
-        <button className="btn">Stop</button>
+        <input type="checkbox" id="toggle"></input>
+        <label htmlFor="toggle"></label>
+        </div>
+       
     </>
   );
 }
 
- 
