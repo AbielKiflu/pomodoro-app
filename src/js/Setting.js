@@ -7,7 +7,8 @@ import React,{useState,useEffect} from 'react';
    }
 
    function addClicked(){
-     added();
+     //added();
+    console.log('addClicked');
    }
 
    function minusClicked(){

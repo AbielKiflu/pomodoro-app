@@ -32977,7 +32977,8 @@ function Setting(_ref) {
   }
 
   function addClicked() {
-    added();
+    //added();
+    console.log('addClicked');
   }
 
   function minusClicked() {
@@ -33102,12 +33103,14 @@ function Index() {
     var toggle = timmer;
     toggle.start = !toggle.start;
     setTimmer(toggle);
+    console.log("hi");
   }
 
   function workTimeAddedChanged() {
     var toggle = timmer;
     toggle.work += 1;
     setTimmer(toggle);
+    console.log(timmer);
   }
 
   function workTimeReducedChanged() {

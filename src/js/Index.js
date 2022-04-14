@@ -63,14 +63,14 @@ export default function Index(){
         let toggle=timmer;
         toggle.start=!toggle.start;
         setTimmer(toggle);
-       
+        console.log("hi")
     }
 
     function workTimeAddedChanged(){
         let toggle=timmer;
         toggle.work+=1;
         setTimmer(toggle);
-        
+        console.log(timmer);
     }
 
     function workTimeReducedChanged(){
