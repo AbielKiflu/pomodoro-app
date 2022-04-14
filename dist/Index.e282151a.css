@@ -20,25 +20,27 @@ body {
 .circle svg {
   width: 200px;
   height: 200px;
+  transform: rotate(-90deg);
   overflow: initial;
   margin: 0;
 }
-.circle circle {
+.circle .svg {
   stroke-width: 10px;
   fill: none;
   stroke-dashoffset: 440;
   stroke-dasharray: 440;
 }
-.circle circle:nth-child(1) {
-  stroke: #ddd7d7;
+
+.svg__inner {
+  stroke: #5247eb;
   stroke-dashoffset: 0;
 }
-.circle circle:nth-child(2) {
-  stroke: #5247eb;
+
+.svg__outer {
+  stroke: #ddd7d7;
   position: relative;
   stroke-dashoffset: 0;
   z-index: 1;
-  stroke-dashoffset: 308;
 }
 
 .timmer {

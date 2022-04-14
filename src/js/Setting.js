@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
 import React from 'react';
 
  export default function Setting() {
-  
+
 
   return (
     <>

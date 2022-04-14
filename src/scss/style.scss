@@ -21,31 +21,33 @@ body{
     svg{
         width: 200px;
         height: 200px;    
-        //transform: rotate(-90deg);
+        transform: rotate(-90deg);
         overflow: initial;
         margin: 0;
     } 
 
-    circle{
+    .svg{
         stroke-width:10px;
         fill:none;
         stroke-dashoffset:440;
         stroke-dasharray:440;
-    
-    &:nth-child(1){
-         stroke: #ddd7d7;
-         stroke-dashoffset:0;
-         
-        }
+// back here    
 
-    &:nth-child(2){
-        stroke: #5247eb; 
-        position: relative;
-        stroke-dashoffset:0;
-        z-index: 1;
-        stroke-dashoffset:calc(440 - ( 440 * 30 )/100); 
-    }
 }
+}
+
+.svg__inner{
+    stroke: #5247eb; 
+    stroke-dashoffset:0;
+    
+   }
+
+.svg__outer{
+    stroke: #ddd7d7;
+    position: relative;
+    stroke-dashoffset:0;
+    z-index: 1;
+    //stroke-dashoffset:calc(440 - ( 440 * 120 )/120); 
 }
 
 .timmer{
