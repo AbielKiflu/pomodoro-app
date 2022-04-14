@@ -8,30 +8,59 @@ body{
     align-items: center;
     justify-content: space-around;
     height: 100vh;
+    background: #f8f9fa;
 }
 
 
 
 .circle{
-
+    padding:0;
+    margin:0;
+    position: relative;
+    outline: 1px solid red;
     svg{
         width: 200px;
         height: 200px;    
         //transform: rotate(-90deg);
         overflow: initial;
+        margin: 0;
     } 
 
     circle{
-        stroke-width:20px;
-        fill:none;    
-    }
-    circle:nth-child(1){
-         stroke: #fff 
+        stroke-width:10px;
+        fill:none;
+        stroke-dashoffset:440;
+        stroke-dasharray:440;
+    
+    &:nth-child(1){
+         stroke: #ddd7d7;
+         stroke-dashoffset:0;
+         
         }
 
-    circle:nth-child(2){
-        stroke: rgb(82, 71, 235); 
+    &:nth-child(2){
+        stroke: #5247eb; 
         position: relative;
-        z-index: 1;    
+        stroke-dashoffset:0;
+        z-index: 1;
+        stroke-dashoffset:calc(440 - ( 440 * 30 )/100); 
     }
+}
+}
+
+.timmer{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2849da;
+}
+
+.btn{
+    margin:0.4rem 0.1rem;
+    padding:0 1rem;
+    color:white;
+    background:#2849da;
 }
