@@ -18,6 +18,21 @@ export default function Index(){
             "start":false
         }
     );
+    
+    useEffect(()=>{
+        const storedTimmer=JSON.parse(localStorage.getItem("timmer"));
+        if(storedTimmer) setTimmer(storedTimmer); 
+        
+      },[]);
+    
+      useEffect(()=>{
+        localStorage.setItem("timmer",JSON.stringify(timmer));
+      },[timmer]);
+
+
+     
+
+    
     const [minutes,setMinutes] =useState(timmer.work);
     const [seconds,setSeconds] =useState(0);
     let [time,setTime] =useState((timmer.work * 60));
@@ -43,20 +58,41 @@ export default function Index(){
        }
     }
 
-     
-    useEffect(() =>{
+
+    function toggleChanged(){
+        let toggle=timmer;
+        toggle.start=!toggle.start;
+        setTimmer(toggle);
+       
+    }
+
+    function workTimeAddedChanged(){
+        let toggle=timmer;
+        toggle.work+=1;
+        setTimmer(toggle);
+        
+    }
+
+    function workTimeReducedChanged(){
+        let toggle=timmer;
+        if(toggle.work>1)
+        toggle.work-=1;
+        setTimmer(toggle);
+    }
+   
+        useEffect(() =>{
         const interval=setInterval(() =>{
             clearInterval(interval);
+            //if(timmer.start)
             countdown(time,breaktime);
         },1000);
     },[time,breaktime]);
 
-   
 
     return(
         <>
         <Timmer minutes={minutes} seconds={seconds} counter={time} start={timmer.work}/>
-        <Setting/>
+        <Setting toggle={timmer.start} added={workTimeAddedChanged} reduced={workTimeReducedChanged} switcher={toggleChanged}/>
         </>
     );
 }

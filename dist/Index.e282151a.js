@@ -32960,20 +32960,43 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Setting;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function Setting() {
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function Setting(_ref) {
+  var toggle = _ref.toggle,
+      switcher = _ref.switcher,
+      added = _ref.added,
+      reduced = _ref.reduced;
+
+  function toggleChanged() {
+    switcher();
+  }
+
+  function addClicked() {
+    added();
+  }
+
+  function minusClicked() {
+    reduced();
+  }
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "setting"
   }, /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn"
+    className: "btn",
+    onClick: addClicked
   }, "+"), /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn"
+    className: "btn",
+    onClick: minusClicked
   }, "-"), /*#__PURE__*/_react.default.createElement("input", {
     type: "checkbox",
-    id: "toggle"
+    id: "toggle",
+    onChange: toggleChanged,
+    checked: toggle
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "toggle"
   })));
@@ -33025,6 +33048,14 @@ function Index() {
       timmer = _useState2[0],
       setTimmer = _useState2[1];
 
+  (0, _react.useEffect)(function () {
+    var storedTimmer = JSON.parse(localStorage.getItem("timmer"));
+    if (storedTimmer) setTimmer(storedTimmer);
+  }, []);
+  (0, _react.useEffect)(function () {
+    localStorage.setItem("timmer", JSON.stringify(timmer));
+  }, [timmer]);
+
   var _useState3 = (0, _react.useState)(timmer.work),
       _useState4 = _slicedToArray(_useState3, 2),
       minutes = _useState4[0],
@@ -33067,9 +33098,28 @@ function Index() {
     }
   }
 
+  function toggleChanged() {
+    var toggle = timmer;
+    toggle.start = !toggle.start;
+    setTimmer(toggle);
+  }
+
+  function workTimeAddedChanged() {
+    var toggle = timmer;
+    toggle.work += 1;
+    setTimmer(toggle);
+  }
+
+  function workTimeReducedChanged() {
+    var toggle = timmer;
+    if (toggle.work > 1) toggle.work -= 1;
+    setTimmer(toggle);
+  }
+
   (0, _react.useEffect)(function () {
     var interval = setInterval(function () {
-      clearInterval(interval);
+      clearInterval(interval); //if(timmer.start)
+
       countdown(time, breaktime);
     }, 1000);
   }, [time, breaktime]);
@@ -33078,7 +33128,12 @@ function Index() {
     seconds: seconds,
     counter: time,
     start: timmer.work
-  }), /*#__PURE__*/_react.default.createElement(_Setting.default, null));
+  }), /*#__PURE__*/_react.default.createElement(_Setting.default, {
+    toggle: timmer.start,
+    added: workTimeAddedChanged,
+    reduced: workTimeReducedChanged,
+    switcher: toggleChanged
+  }));
 }
 
 _client.default.createRoot(document.getElementById('root')).render( /*#__PURE__*/_react.default.createElement(Index, null));
