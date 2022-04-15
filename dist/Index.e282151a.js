@@ -32930,7 +32930,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function Time(_ref) {
-  var time = _ref.time,
+  var title = _ref.title,
+      time = _ref.time,
       setTime = _ref.setTime,
       start = _ref.start;
 
@@ -32965,7 +32966,7 @@ function Time(_ref) {
 
   var min = Math.floor(time / 60);
   var sec = time % 60;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h2", null, title), /*#__PURE__*/_react.default.createElement("div", {
     className: "circle"
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: "timmer"
@@ -33017,6 +33018,7 @@ function Setting(_ref) {
   var toggle = function toggle() {
     var toggle = start;
     toggle = !toggle;
+    setTime(120);
     setStart(toggle);
   };
 
@@ -33089,12 +33091,27 @@ function Index() {
       start = _useState6[0],
       setStart = _useState6[1];
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Time.default, {
-    time: workTime,
-    setTime: setWorkTime,
-    start: start,
-    setStart: setStart
-  }), /*#__PURE__*/_react.default.createElement(_Setting.default, {
+  function TimerSelector() {
+    if (workTime > 0) {
+      return /*#__PURE__*/_react.default.createElement(_Time.default, {
+        title: "Work",
+        time: workTime,
+        setTime: setWorkTime,
+        start: start,
+        setStart: setStart
+      });
+    } else {
+      return /*#__PURE__*/_react.default.createElement(_Time.default, {
+        title: "Break",
+        time: breakTime,
+        setTime: setBreakTime,
+        start: start,
+        setStart: setStart
+      });
+    }
+  }
+
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(TimerSelector, null), /*#__PURE__*/_react.default.createElement(_Setting.default, {
     time: workTime,
     setTime: setWorkTime,
     start: start,

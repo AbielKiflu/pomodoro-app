@@ -13,10 +13,19 @@ export default function Index(){
     const [breakTime,setBreakTime]=useState(60);
     const [start,setStart]=useState(true);
      
+ 
+function TimerSelector(){
+    if(workTime>0){
+        return <Time title="Work" time={workTime} setTime={setWorkTime} start={start} setStart={setStart}/>
+    }else{
+        return <Time title="Break"  time={breakTime} setTime={setBreakTime} start={start} setStart={setStart}/>
+    }
+}
+
 
     return(
         <>
-        <Time time={workTime} setTime={setWorkTime} start={start} setStart={setStart}/>
+         <TimerSelector/>
          <Setting time={workTime} setTime={setWorkTime} start={start} setStart={setStart}/>
         </>
     );

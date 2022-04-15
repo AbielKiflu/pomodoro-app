@@ -19,7 +19,9 @@ import React from 'react';
   const toggle=()=>{
     let toggle=start;
     toggle = !toggle;
+    setTime(120);
     setStart(toggle);
+    
   }
 
   return (

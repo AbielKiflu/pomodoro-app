@@ -11,6 +11,11 @@ body {
   background: #e5eff8;
 }
 
+h2 {
+  color: #243d42;
+  text-align: center;
+}
+
 .setting {
   display: flex;
   align-items: center;

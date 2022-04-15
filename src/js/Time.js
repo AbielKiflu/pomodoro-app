@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 
 
-export default function Time({time,setTime,start}){
+export default function Time({title,time,setTime,start}){
 const [startTime,setStartTime]=useState(time);
 
     useEffect(()=>{
@@ -37,6 +37,7 @@ const [startTime,setStartTime]=useState(time);
  
     return(
         <>
+        <h2>{title}</h2>
         <div className="circle">
             <span className="timmer">{min<10?"0"+min:min}:{sec<10?"0"+sec:sec}</span>
             <svg className="svg">
