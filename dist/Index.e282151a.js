@@ -32903,41 +32903,73 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"js/Timmer.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"js/Time.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = Timmer;
+exports.default = Time;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function Timmer(_ref) {
-  var minutes = _ref.minutes,
-      seconds = _ref.seconds,
-      counter = _ref.counter,
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function Time(_ref) {
+  var time = _ref.time,
+      setTime = _ref.setTime,
       start = _ref.start;
-  var timeMinutes = minutes < 10 ? "0" + minutes : minutes;
-  var timeSeconds = seconds < 10 ? "0" + seconds : seconds;
 
-  function progressBar(counter, start) {
+  var _useState = (0, _react.useState)(time),
+      _useState2 = _slicedToArray(_useState, 2),
+      startTime = _useState2[0],
+      setStartTime = _useState2[1];
+
+  (0, _react.useEffect)(function () {
+    var interval = setInterval(function () {
+      clearInterval(interval);
+
+      if (start) {
+        var initialCounter = time;
+
+        if (initialCounter > 0) {
+          initialCounter--;
+          setTime(initialCounter);
+        }
+      } else {//timmer reset
+      }
+    }, 1000);
+  }, [time]);
+
+  function progressBar(time) {
     var progress = 0;
-    start = start * 60;
-    if (counter > 0) progress = 440 - 440 * counter / start;
+    if (time > 0) progress = 440 - 440 * time / startTime;
     return {
       strokeDashoffset: progress
     };
-  } //console.log(progressBar(counter));
+  }
 
-
+  var min = Math.floor(time / 60);
+  var sec = time % 60;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "circle"
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: "timmer"
-  }, " ", timeMinutes, ":", timeSeconds), /*#__PURE__*/_react.default.createElement("svg", {
+  }, min < 10 ? "0" + min : min, ":", sec < 10 ? "0" + sec : sec), /*#__PURE__*/_react.default.createElement("svg", {
     className: "svg"
   }, /*#__PURE__*/_react.default.createElement("circle", {
     className: "svg__inner",
@@ -32946,7 +32978,7 @@ function Timmer(_ref) {
     r: "70"
   }), /*#__PURE__*/_react.default.createElement("circle", {
     className: "svg__outer",
-    style: progressBar(counter, start),
+    style: progressBar(time),
     cx: "100",
     cy: "100",
     r: "70"
@@ -32960,44 +32992,47 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Setting;
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Setting(_ref) {
-  var toggle = _ref.toggle,
-      switcher = _ref.switcher,
-      added = _ref.added,
-      reduced = _ref.reduced;
+  var time = _ref.time,
+      setTime = _ref.setTime,
+      start = _ref.start,
+      setStart = _ref.setStart;
 
-  function toggleChanged() {
-    switcher();
-  }
+  var increment = function increment() {
+    var initial = time;
+    initial = initial + 60;
+    setTime(initial);
+  };
 
-  function addClicked() {
-    //added();
-    console.log('addClicked');
-  }
+  var decrement = function decrement() {
+    var initial = time;
+    if (initial > 0) initial = initial - 60;
+    setTime(initial);
+  };
 
-  function minusClicked() {
-    reduced();
-  }
+  var toggle = function toggle() {
+    var toggle = start;
+    toggle = !toggle;
+    setStart(toggle);
+  };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "setting"
   }, /*#__PURE__*/_react.default.createElement("button", {
     className: "btn",
-    onClick: addClicked
+    onClick: increment
   }, "+"), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn",
-    onClick: minusClicked
+    onClick: decrement
   }, "-"), /*#__PURE__*/_react.default.createElement("input", {
     type: "checkbox",
     id: "toggle",
-    onChange: toggleChanged,
-    checked: toggle
+    checked: start,
+    onChange: toggle
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "toggle"
   })));
@@ -33016,7 +33051,7 @@ var _client = _interopRequireDefault(require("react-dom/client"));
 
 require("../scss/style.scss");
 
-var _Timmer = _interopRequireDefault(require("./Timmer"));
+var _Time = _interopRequireDefault(require("./Time"));
 
 var _Setting = _interopRequireDefault(require("./Setting"));
 
@@ -33039,108 +33074,36 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function Index() {
-  // update the timmer object with a setting
-  var _useState = (0, _react.useState)({
-    "work": 1,
-    "break": 1,
-    "start": false
-  }),
+  var _useState = (0, _react.useState)(120),
       _useState2 = _slicedToArray(_useState, 2),
-      timmer = _useState2[0],
-      setTimmer = _useState2[1];
+      workTime = _useState2[0],
+      setWorkTime = _useState2[1];
 
-  (0, _react.useEffect)(function () {
-    var storedTimmer = JSON.parse(localStorage.getItem("timmer"));
-    if (storedTimmer) setTimmer(storedTimmer);
-  }, []);
-  (0, _react.useEffect)(function () {
-    localStorage.setItem("timmer", JSON.stringify(timmer));
-  }, [timmer]);
-
-  var _useState3 = (0, _react.useState)(timmer.work),
+  var _useState3 = (0, _react.useState)(60),
       _useState4 = _slicedToArray(_useState3, 2),
-      minutes = _useState4[0],
-      setMinutes = _useState4[1];
+      breakTime = _useState4[0],
+      setBreakTime = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(0),
+  var _useState5 = (0, _react.useState)(true),
       _useState6 = _slicedToArray(_useState5, 2),
-      seconds = _useState6[0],
-      setSeconds = _useState6[1];
+      start = _useState6[0],
+      setStart = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(timmer.work * 60),
-      _useState8 = _slicedToArray(_useState7, 2),
-      time = _useState8[0],
-      setTime = _useState8[1];
-
-  var _useState9 = (0, _react.useState)(timmer.break * 60),
-      _useState10 = _slicedToArray(_useState9, 2),
-      breaktime = _useState10[0],
-      setBreakTime = _useState10[1];
-
-  function countdown(time, breaktime) {
-    if (time >= 0) {
-      var min = Math.floor(time / 60);
-      var sec = time % 60;
-      setMinutes(min);
-      setSeconds(sec);
-      time--;
-      setTime(time);
-    } else {
-      if (breaktime >= 0) {
-        var _min = Math.floor(breaktime / 60);
-
-        var _sec = breaktime % 60;
-
-        setMinutes(_min);
-        setSeconds(_sec);
-        breaktime--;
-        setBreakTime(breaktime);
-      }
-    }
-  }
-
-  function toggleChanged() {
-    var toggle = timmer;
-    toggle.start = !toggle.start;
-    setTimmer(toggle);
-    console.log("hi");
-  }
-
-  function workTimeAddedChanged() {
-    var toggle = timmer;
-    toggle.work += 1;
-    setTimmer(toggle);
-    console.log(timmer);
-  }
-
-  function workTimeReducedChanged() {
-    var toggle = timmer;
-    if (toggle.work > 1) toggle.work -= 1;
-    setTimmer(toggle);
-  }
-
-  (0, _react.useEffect)(function () {
-    var interval = setInterval(function () {
-      clearInterval(interval); //if(timmer.start)
-
-      countdown(time, breaktime);
-    }, 1000);
-  }, [time, breaktime]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Timmer.default, {
-    minutes: minutes,
-    seconds: seconds,
-    counter: time,
-    start: timmer.work
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Time.default, {
+    time: workTime,
+    setTime: setWorkTime,
+    start: start,
+    setStart: setStart
   }), /*#__PURE__*/_react.default.createElement(_Setting.default, {
-    toggle: timmer.start,
-    added: workTimeAddedChanged,
-    reduced: workTimeReducedChanged,
-    switcher: toggleChanged
+    time: workTime,
+    setTime: setWorkTime,
+    start: start,
+    setStart: setStart
   }));
 }
 
 _client.default.createRoot(document.getElementById('root')).render( /*#__PURE__*/_react.default.createElement(Index, null));
-},{"react":"../node_modules/react/index.js","react-dom/client":"../node_modules/react-dom/client.js","../scss/style.scss":"scss/style.scss","./Timmer":"js/Timmer.js","./Setting":"js/Setting.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom/client":"../node_modules/react-dom/client.js","../scss/style.scss":"scss/style.scss","./Time":"js/Time.js","./Setting":"js/Setting.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -33168,7 +33131,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40627" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41289" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

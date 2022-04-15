@@ -1,26 +1,34 @@
-import React,{useState,useEffect} from 'react';
+import React from 'react';
 
- export default function Setting({toggle,switcher,added,reduced}) {
+ export default function Setting({time,setTime,start,setStart}) {
+ 
 
-   function toggleChanged(){
-    switcher();
-   }
+  const increment=()=>{
+    let initial=time;
+    initial=initial + 60 ;
+    setTime(initial);
+  }
 
-   function addClicked(){
-     //added();
-    console.log('addClicked');
-   }
+  const decrement=()=>{
+    let initial=time;
+    if (initial>0)
+    initial=initial - 60 ;
+    setTime(initial);
+  }
 
-   function minusClicked(){
-     reduced();
-   }
+  const toggle=()=>{
+    let toggle=start;
+    toggle = !toggle;
+    setStart(toggle);
+  }
 
   return (
     <>
+     
         <div className="setting">
-        <button className="btn" onClick={addClicked}>+</button>
-        <button className="btn" onClick={minusClicked}>-</button>
-        <input type="checkbox" id="toggle" onChange={toggleChanged} checked={toggle}></input>
+        <button className="btn" onClick={increment} >+</button>
+        <button className="btn" onClick={decrement} >-</button>
+        <input type="checkbox" id="toggle" checked={start} onChange={toggle} ></input>
         <label htmlFor="toggle"></label>
         </div>
        
