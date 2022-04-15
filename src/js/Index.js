@@ -12,13 +12,13 @@ export default function Index(){
     const [workTime,setWorkTime]=useState(120);
     const [breakTime,setBreakTime]=useState(60);
     const [start,setStart]=useState(true);
-     
+    const [state,setState]=useState(true);
  
 function TimerSelector(){
-    if(workTime>0){
-        return <Time title="Work" time={workTime} setTime={setWorkTime} start={start} setStart={setStart}/>
+    if(state>0){
+        return <Time title="Work" state={state} setState={setState} time={workTime} setTime={setWorkTime} start={start} setStart={setStart}/>
     }else{
-        return <Time title="Break"  time={breakTime} setTime={setBreakTime} start={start} setStart={setStart}/>
+        return <Time title="Break" state={state} setState={setState} time={breakTime} setTime={setBreakTime} start={start} setStart={setStart}/>
     }
 }
 
@@ -26,7 +26,7 @@ function TimerSelector(){
     return(
         <>
          <TimerSelector/>
-         <Setting time={workTime} setTime={setWorkTime} start={start} setStart={setStart}/>
+         <Setting state={state} time={workTime} setTime={setWorkTime} start={start} setStart={setStart}/>
         </>
     );
 }

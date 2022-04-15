@@ -1,9 +1,8 @@
 import React,{useEffect,useState} from "react";
 
 
-export default function Time({title,time,setTime,start}){
-const [startTime,setStartTime]=useState(time);
-
+export default function Time({title,state,setState,time,setTime,start}){
+  
     useEffect(()=>{
         const interval=setInterval(() =>{
             clearInterval(interval);
@@ -12,6 +11,8 @@ const [startTime,setStartTime]=useState(time);
                 if(initialCounter >0){
                     initialCounter--;
                     setTime(initialCounter);
+                }else{
+                    setState(!state);
                 }
              }else{
                  //timmer reset
@@ -27,7 +28,7 @@ const [startTime,setStartTime]=useState(time);
      function progressBar(time){
         let progress=0;
         if(time>0)
-            progress=440 - ( 440 * time )/startTime;
+            progress=440 - ( 440 * time )/120;
             return {strokeDashoffset:progress};
     }
 
