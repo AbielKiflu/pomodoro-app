@@ -32923,35 +32923,37 @@ function Time(_ref) {
       setState = _ref.setState,
       time = _ref.time,
       setTime = _ref.setTime,
-      start = _ref.start;
+      start = _ref.start,
+      counter = _ref.counter,
+      setCounter = _ref.setCounter;
   (0, _react.useEffect)(function () {
     var interval = setInterval(function () {
       clearInterval(interval);
 
       if (start) {
-        var initialCounter = time;
+        var initialCounter = counter;
 
         if (initialCounter > 0) {
           initialCounter--;
-          setTime(initialCounter);
+          setCounter(initialCounter);
         } else {
           setState(!state);
         }
       } else {//timmer reset
       }
     }, 1000);
-  }, [time]);
+  }, [counter]);
 
-  function progressBar(time) {
+  function progressBar(counter, time) {
     var progress = 0;
-    if (time > 0) progress = 440 - 440 * time / 120;
+    if (counter > 0) progress = 440 - 440 * counter / time;
     return {
       strokeDashoffset: progress
     };
   }
 
-  var min = Math.floor(time / 60);
-  var sec = time % 60;
+  var min = Math.floor(counter / 60);
+  var sec = counter % 60;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h2", null, title), /*#__PURE__*/_react.default.createElement("div", {
     className: "circle"
   }, /*#__PURE__*/_react.default.createElement("span", {
@@ -32965,7 +32967,7 @@ function Time(_ref) {
     r: "70"
   }), /*#__PURE__*/_react.default.createElement("circle", {
     className: "svg__outer",
-    style: progressBar(time),
+    style: progressBar(counter, time),
     cx: "100",
     cy: "100",
     r: "70"
@@ -32984,27 +32986,31 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Setting(_ref) {
-  var time = _ref.time,
+  var counter = _ref.counter,
+      setCounter = _ref.setCounter,
+      time = _ref.time,
       setTime = _ref.setTime,
       start = _ref.start,
       setStart = _ref.setStart;
 
   var increment = function increment() {
+    setStart(false);
     var initial = time;
     initial = initial + 60;
-    setTime(initial);
+    setTime(initial); //setCounter(initial);
   };
 
   var decrement = function decrement() {
+    setStart(false);
     var initial = time;
     if (initial > 0) initial = initial - 60;
-    setTime(initial);
+    setTime(initial); //setCounter(initial);
   };
 
   var toggle = function toggle() {
     var toggle = start;
     toggle = !toggle;
-    setTime(120);
+    setCounter(time);
     setStart(toggle);
   };
 
@@ -33072,20 +33078,27 @@ function Index() {
       breakTime = _useState4[0],
       setBreakTime = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(true),
+  var _useState5 = (0, _react.useState)(0),
       _useState6 = _slicedToArray(_useState5, 2),
-      start = _useState6[0],
-      setStart = _useState6[1];
+      counter = _useState6[0],
+      setCounter = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(true),
+  var _useState7 = (0, _react.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      state = _useState8[0],
-      setState = _useState8[1];
+      start = _useState8[0],
+      setStart = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(true),
+      _useState10 = _slicedToArray(_useState9, 2),
+      state = _useState10[0],
+      setState = _useState10[1];
 
   function TimerSelector() {
-    if (state > 0) {
+    if (state) {
       return /*#__PURE__*/_react.default.createElement(_Time.default, {
         title: "Work",
+        counter: counter,
+        setCounter: setCounter,
         state: state,
         setState: setState,
         time: workTime,
@@ -33096,6 +33109,8 @@ function Index() {
     } else {
       return /*#__PURE__*/_react.default.createElement(_Time.default, {
         title: "Break",
+        counter: counter,
+        setCounter: setCounter,
         state: state,
         setState: setState,
         time: breakTime,
@@ -33108,6 +33123,8 @@ function Index() {
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(TimerSelector, null), /*#__PURE__*/_react.default.createElement(_Setting.default, {
     state: state,
+    counter: counter,
+    setCounter: setCounter,
     time: workTime,
     setTime: setWorkTime,
     start: start,

@@ -1,25 +1,29 @@
 import React from 'react';
 
- export default function Setting({time,setTime,start,setStart}) {
+ export default function Setting({counter,setCounter,time,setTime,start,setStart}) {
  
 
   const increment=()=>{
+    setStart(false);
     let initial=time;
     initial=initial + 60 ;
     setTime(initial);
+    //setCounter(initial);
   }
 
   const decrement=()=>{
+  setStart(false);
     let initial=time;
     if (initial>0)
     initial=initial - 60 ;
     setTime(initial);
+    //setCounter(initial);
   }
 
   const toggle=()=>{
     let toggle=start;
     toggle = !toggle;
-    setTime(120);
+    setCounter(time);
     setStart(toggle);
     
   }

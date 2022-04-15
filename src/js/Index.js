@@ -11,14 +11,16 @@ import Setting from "./Setting"
 export default function Index(){
     const [workTime,setWorkTime]=useState(120);
     const [breakTime,setBreakTime]=useState(60);
-    const [start,setStart]=useState(true);
+    const [counter,setCounter]=useState(0);
+    const [start,setStart]=useState(false);
     const [state,setState]=useState(true);
  
+
 function TimerSelector(){
-    if(state>0){
-        return <Time title="Work" state={state} setState={setState} time={workTime} setTime={setWorkTime} start={start} setStart={setStart}/>
+    if(state){
+        return <Time title="Work" counter={counter} setCounter={setCounter} state={state} setState={setState} time={workTime} setTime={setWorkTime} start={start} setStart={setStart}/>
     }else{
-        return <Time title="Break" state={state} setState={setState} time={breakTime} setTime={setBreakTime} start={start} setStart={setStart}/>
+        return <Time title="Break" counter={counter} setCounter={setCounter} state={state} setState={setState} time={breakTime} setTime={setBreakTime} start={start} setStart={setStart}/>
     }
 }
 
@@ -26,7 +28,7 @@ function TimerSelector(){
     return(
         <>
          <TimerSelector/>
-         <Setting state={state} time={workTime} setTime={setWorkTime} start={start} setStart={setStart}/>
+         <Setting state={state} counter={counter} setCounter={setCounter} time={workTime} setTime={setWorkTime} start={start} setStart={setStart}/>
         </>
     );
 }
