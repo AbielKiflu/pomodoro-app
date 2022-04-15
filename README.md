@@ -10,4 +10,5 @@ The Pomodoro Technique is a time management method developed by Francesco Cirill
 Abiel Kiflu
 
 ## Visit
-Follow this [link](https://abielkiflu.github.io/pomodoro-app/)
+Follow this [Page](https://abielkiflu.github.io/pomodoro-app/)
+Follow this [Github](https://github.com/AbielKiflu/pomodoro-app)
